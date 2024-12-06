@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Number Guessing Game</title>
+</head>
+<body>
+	<h1>113306056_Lab3_Number Guessing Game</h1>
+	<div id="result"></div>
+
+	<script>
+		var targetNumber=Math.floor(Math.random()*99)+2;
+		var attemptLeft=7;
+
+		var resultDiv=document.getElementById("result");
+
+		var minRange=1;
+		var maxRange=100;
+
+
+		while(attemptLeft>0){
+			var userInput=window.prompt('請輸入'+minRange+'到'+maxRange+'的數字\n還剩下'+attemptLeft+'次機會');
+
+			if(userInput===null||userInput.trim()===""){
+				alert('輸入不可空白');
+				continue;
+			}
+
+		var guess=Number(userInput);
+			if(isNaN(guess)||guess<=1||guess>=100){
+			alert("請輸入有效範圍內的數字!(不能選擇範圍的上下限)");
+			continue;
+		}
+
+		attemptLeft--;
+
+		if(guess===targetNumber){
+				alert("恭喜，猜對了！");
+				resultDiv.innerHTML='<img src="correct.jpg" alt="猜對了" width="800" height="600">';
+				break;
+
+		}else if(guess>targetNumber){
+				alert("數字太大了");
+				maxRange=guess
+				continue;
+		}else if(guess<targetNumber){
+				alert("數字太小了");
+				minRange=guess;
+				continue;
+		}
+
+	}
+		if(attemptLeft===0){
+				alert("猜的次數用完了，遊戲結束，正確答案是"+targetNumber);
+				resultDiv.innerHTML='<img src="wrong.jpeg" alt="猜錯了" width=800 height="600">';
+			}
+		
+
+	</script>
+
+</body>
+</html>
